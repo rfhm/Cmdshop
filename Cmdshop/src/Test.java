@@ -1,4 +1,3 @@
-import java.io.File;
 import java.io.InputStream;
 import java.util.Scanner;
 
@@ -8,7 +7,7 @@ public class Test {
         while (bo) {
             //File file=new File("D:\\JAVAlx\\shangcheng\\src\\users.xlsx");
             InputStream in = Class.forName("Test").getResourceAsStream("/users.xlsx");
-            ReadExcel readExcel = new ReadExcel();
+            ReadUserExcel readExcel = new ReadUserExcel();
             User[] users = readExcel.readExcel(in);
 
             System.out.println("请输入用户名");
