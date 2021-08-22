@@ -22,7 +22,7 @@ public class Test {
                 if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
                     System.out.println("登录成功");
                     ReadProductExcel readProductExcel=new ReadProductExcel();
-                    Product[] products=readProductExcel.readExcel(is);
+                    Product[] products=readProductExcel.getAllProduct(is);
                     for(Product product:products){
                         System.out.println(product.getpId());
                         System.out.println(product.getpName());
@@ -33,6 +33,37 @@ public class Test {
                     System.out.println("请输入商品Id");
                     String ID=sc.next();
                     Product[] carts=new Product[3];
+                    int cart=0;
+                    is=null;
+                    is=Class.forName("Test").getResourceAsStream("/product.xlsx");
+                    Product product=readProductExcel.getProductById(ID,is);
+                    if(product!=null){
+                        carts[cart++]=product;
+                    }
+                    System.out.println("继续购买商品请按1");
+                    System.out.println("查看购物车请按2");
+                    int choose=sc.nextInt();
+                    if(choose==1){
+                        is=null;
+                        is = Class.forName("Test").getResourceAsStream("/product.xlsx");
+                        readExcel = new ReadUserExcel();
+                        products=readProductExcel.getAllProduct(is);
+                        for(Product p:products){
+                            System.out.println(p.getpId());
+                            System.out.println(p.getpName());
+                            System.out.println(p.getPrice());
+                            System.out.println(p.getpDesc());
+                        }
+                        System.out.println("请输入商品Id");
+                        ID=sc.next();
+                        is=null;
+                        is = Class.forName("Test").getResourceAsStream("/product.xlsx");
+                        product=readProductExcel.getProductById(ID,is);
+                        if(product!=null){
+                            carts[cart++]=product;
+                        }
+                    }else if(choose==2){
+                    }
                     break;
                 } else {
                     System.out.println("用户名或者密码错误");
