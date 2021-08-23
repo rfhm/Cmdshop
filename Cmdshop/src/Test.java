@@ -37,7 +37,19 @@ public class Test {
                             viewCarts();
                         } else if (choose == 2) {
                             shopping(sc);
-                        } else if (choose == 4) {
+                        }else if(choose==3){
+                            Order order=new Order();
+                            order.setUser(users[i]);//关联用户
+                            Product products[]=new Product[count];
+                            for(int j=0;j<carts.length;j++){
+                                if(carts[j]!=null){
+                                    products[j]=carts[j];
+                                }
+                            }
+                            order.setProducts(products);//关联商品
+                            CreateOrder.createOrder(order);
+
+                        }else if (choose == 4) {
                             break;
                         }
                     }
