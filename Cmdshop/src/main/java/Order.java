@@ -5,7 +5,7 @@ public class Order {
     private User user;
     private Product products[];
     private Map<Integer,Integer> ammount;
-    private float totalPrice;
+    private Map<Integer,Float> totalAmonutProProduct;
     private float finalpay;
     private Date orderDate;
 
@@ -33,12 +33,12 @@ public class Order {
         this.ammount = ammount;
     }
 
-    public float getTotalPrice() {
-        return totalPrice;
+    public Map<Integer, Float> getTotalAmonutProProduct() {
+        return totalAmonutProProduct;
     }
 
-    public void setTotalPrice(float totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setTotalAmonutProProduct(Map<Integer, Float> totalAmonutProProduct) {
+        this.totalAmonutProProduct = totalAmonutProProduct;
     }
 
     public float getFinalpay() {

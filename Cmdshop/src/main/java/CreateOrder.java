@@ -16,7 +16,7 @@ import java.util.Set;
 
 
 public class CreateOrder {
-    public static String outputFile ="D:\\Order.xls";
+    public static String outputFile =System.getProperty("user.dir") + File.separator + "Orders.xls";
     //System.getProperty("user.dir") + File.separator + "Orders.xls"
     public static void createOrder(Order order) {
         try {
@@ -45,23 +45,21 @@ public class CreateOrder {
                 HSSFRow row = sheet.createRow((short) i + 1);
                 for (int j = 0; j < 6; j++) {
                     HSSFCell cell = row.createCell((short) j);
-                    int pId=Integer.parseInt(order.getProducts()[i].getpId());
-                    if(j==0){
+                    int pId = Integer.parseInt(order.getProducts()[i].getpId());
+                    if (j == 0) {
                         cell.setCellValue(order.getUser().getUsername());
                         //cell.setCellValue((Calendar) style);设置背景色
-                    }else if(j==1){
+                    } else if (j == 1) {
                         cell.setCellValue(pId);
-                    }else if(j==2){
+                    } else if (j == 2) {
                         Map<Integer, Integer> ammount = order.getAmmount();
-                            int productNum=ammount.get(pId);
-                            cell.setCellValue(productNum);
-                        }
-                        /*int productNum = ammount.get(pId);
+                        int productNum = ammount.get(pId);
                         cell.setCellValue(productNum);
                     } else if (j == 3) {
-                        Map<Integer, Float> totalAmountPerProduct = order.getTotalAmountPerProduct();
+                        Map<Integer, Float> totalAmountPerProduct = order.getTotalAmonutProProduct();
                         float productTotalPay = totalAmountPerProduct.get(pId);
-                        cell.setCellValue(productTotalPay);*/
+                        cell.setCellValue(productTotalPay);
+                    }
                 }
             }
 

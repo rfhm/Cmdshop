@@ -8,6 +8,8 @@ import java.util.Scanner;
 public class Test {
     static Product carts[] = new Product[3];//创建购物车（用数组模拟）
     static int count = 0;
+    static Map<Integer,Integer> ammount=new HashMap<Integer,Integer>();
+    static Map<Integer,Float> totalAmonutProProduct=new HashMap<Integer,Float>();
 
     public static void main(String[] args) throws ClassNotFoundException {
         boolean bo = true;
@@ -46,12 +48,17 @@ public class Test {
                                 }
                             }
                             order.setProducts(products);//关联商品
-                            Map<Integer,Integer> ammount=new HashMap<Integer,Integer>();
-                            ammount.put(11111,2);
-                            ammount.put(22222,1);
-                            order.setAmmount(ammount);
-                            CreateOrder.createOrder(order);
 
+                            order.setAmmount(ammount);//关联商品数量
+
+                            for(Product product:products){
+                                //System.out.println("price"+product.getPrice());
+                                int cou=ammount.get(Integer.parseInt(product.getpId()));
+                                totalAmonutProProduct.put(Integer.parseInt(product.getpId()),product.getPrice()*cou);
+                                order.setTotalAmonutProProduct(totalAmonutProProduct);
+                            }
+                            //order.setTotalPrice(price*ammount);
+                            CreateOrder.createOrder(order);
                         }else if (choose == 4) {
                             break;
                         }
@@ -88,8 +95,14 @@ public class Test {
             System.out.println("\t\t" + product.getpDesc());
         }
 
-        System.out.println("请输入商品ID，把该商品加入购物车：");
-        String pId = sc.next();
+        System.out.println("请输入商品ID以及购买数量，如：11111,2；把该商品加入购物车：");
+        String pIdfo = sc.next();
+        String str[]=pIdfo.split(",");
+
+        String pId=str[0];//商品ID
+        String num=str[1];//购买数量
+        ammount.put(Integer.parseInt(pId),Integer.parseInt(num));
+
         ReadProductExcel readProductExcel1 = new ReadProductExcel();
         is = null;
         is = Class.forName("Test").getResourceAsStream("/product.xlsx");//  /表示的就是classpath
