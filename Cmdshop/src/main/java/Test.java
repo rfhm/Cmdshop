@@ -1,6 +1,8 @@
 import org.apache.xmlbeans.soap.SchemaWSDLArrayType;
 
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Test {
@@ -10,19 +12,16 @@ public class Test {
     public static void main(String[] args) throws ClassNotFoundException {
         boolean bo = true;
         while (bo) {
-            //File file=new File("D:\\JAVAlx\\shangcheng\\src\\users.xlsx");
-            InputStream in = Class.forName("Test").getResourceAsStream("/users.xlsx");
-
-            ReadUserExcel readExcel = new ReadUserExcel();
-            User[] users = readExcel.readExcel(in);
-
             System.out.println("请输入用户名");
             Scanner sc = new Scanner(System.in);
             String username = sc.next();
-
             System.out.println("请输入密码");
             String password = sc.next();
 
+            //File file=new File("D:\\JAVAlx\\shangcheng\\src\\users.xlsx");
+            InputStream in = Class.forName("Test").getResourceAsStream("/users.xlsx");
+            ReadUserExcel readExcel = new ReadUserExcel();
+            User[] users = readExcel.readExcel(in);
             for (int i = 0; i < users.length; i++) {
                 if (username.equals(users[i].getUsername()) && password.equals(users[i].getPassword())) {
                     bo = false;
@@ -47,6 +46,10 @@ public class Test {
                                 }
                             }
                             order.setProducts(products);//关联商品
+                            Map<Integer,Integer> ammount=new HashMap<Integer,Integer>();
+                            ammount.put(11111,2);
+                            ammount.put(22222,1);
+                            order.setAmmount(ammount);
                             CreateOrder.createOrder(order);
 
                         }else if (choose == 4) {
